@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spend a Coffee - 3D-Print Master</title>
+  <style>
+    :root {
+      --bg-color: #f4f4f4;
+      --text-color: #333333;
+      --accent-color: #007bff;
+      --button-bg: #007bff;
+      --button-text: #ffffff;
+      --tab-bg: #e0e0e0;
+      --tab-active-bg: #ffffff;
+    }
+    [data-theme="dark"] {
+      --bg-color: #1a1a1a;
+      --text-color: #ffffff;
+      --accent-color: #66b0ff;
+      --button-bg: #66b0ff;
+      --button-text: #000000;
+      --tab-bg: #333333;
+      --tab-active-bg: #4a4a4a;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: var(--tab-bg);
+    }
+    .hamburger {
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .hamburger-content {
+      display: none;
+      position: absolute;
+      top: 50px;
+      left: 20px;
+      background-color: var(--tab-active-bg);
+      border: 1px solid var(--text-color);
+      padding: 10px;
+      z-index: 1000;
+    }
+    .hamburger-content span {
+      display: block;
+      padding: 8px;
+      cursor: pointer;
+      color: var(--text-color);
+    }
+    .hamburger-content span:hover {
+      background-color: var(--accent-color);
+      color: var(--button-text);
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      text-align: center;
+      background-color: var(--tab-active-bg);
+      border-radius: 8px;
+    }
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 1.1em;
+      line-height: 1.5;
+      margin-bottom: 30px;
+    }
+    .donate-options {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .donate-button {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      margin-bottom: 20px;
+    }
+    .donate-button:hover {
+      background-color: var(--accent-color);
+      filter: brightness(1.2);
+    }
+    .qr-code {
+      max-width: 200px;
+      height: auto;
+      margin: 10px auto;
+      display: block;
+    }
+    .qr-label {
+      font-size: 0.9em;
+      color: var(--text-color);
+      opacity: 0.8;
+      margin-top: 10px;
+    }
+    .back-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .back-button:hover {
+      background-color: var(--accent-color);
+      filter: brightness(1.2);
+    }
+    .coffee-link {
+      display: inline-block;
+      position: relative;
+    }
+    .coffee-container {
+      position: relative;
+      display: inline-block;
+    }
+    .coffee-img {
+      max-height: 180px;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease;
+    }
+    .coffee-link:hover .coffee-img {
+      transform: scale(1.05);
+    }
+    .steam {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      width: 80px;
+      height: 140px;
+      background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5) 0%, transparent 80%);
+      opacity: 0;
+      transform: translateX(-50%) scaleY(0.5);
+      animation: steam-rise 3s ease-out infinite;
+      pointer-events: none;
+    }
+    @keyframes steam-rise {
+      0% {
+        transform: translateX(-50%) translateY(-60px) scaleY(0,5);
+        opacity: 0;
+      }
+      30% {
+        opacity: 0.4;
+      }
+      60% {
+        opacity: 0.2;
+      }
+      100% {
+        transform: translateX(-50%) translateY(-40px) scaleY(1);
+        opacity: 0;
+      }
+    }
+    @media (max-width: 600px) {
+      .container {
+        margin: 10px;
+        padding: 15px;
+      }
+      h1 {
+        font-size: 1.5em;
+      }
+      p {
+        font-size: 1em;
+      }
+      .qr-code {
+        max-width: 150px;
+      }
+    }
+  </style>
+</head>
+<body data-theme="system">
+  <div class="header">
+    <div class="hamburger">☰</div>
+    <div class="hamburger-content">
+      <span>Design</span>
+      <span class="theme-option" data-theme="light">Hell</span>
+      <span class="theme-option" data-theme="dark">Dunkel</span>
+      <span class="theme-option" data-theme="system">System</span>
+      <span><a href="3D-Print Master - by SpackenJaeger.html">Zurück zum Kostenrechner</a></span>
+    </div>
+  </div>
+  <div class="container">
+    <h1>Spend a Coffee!</h1>
+    <p>Vielen Dank, dass du den 3D-Print Master nutzt! <br>
+      Der erste Druckkosten-Rechner mit Multicolor Unterstützung, ganz ohne AMS 😄<br>
+      Deine Unterstützung hilft mir, das Projekt weiterzuentwickeln, neue Funktionen hinzuzufügen und die Kosten zu decken.<br>
+      Ein virtueller Kaffee wäre also wirklich großartig!</p>
+    <div class="donate-options">
+      <div style="text-align: center; display: flex; flex-direction: column; justify-content: center;">
+        <a href="https://www.paypal.com/donate/?hosted_button_id=GSTMKWFFR5NCL" target="_blank" class="donate-button">Jetzt spenden!</a>
+        <img src="QR-Code.png" alt="QR-Code zum Spenden" class="qr-code">
+        <p class="qr-label">Scanne den QR-Code mit deinem Smartphone, um zu spenden.</p>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: center;">
+        <a href="https://www.paypal.com/donate/?hosted_button_id=GSTMKWFFR5NCL" target="_blank" title="Klick für Koffein!" class="coffee-link">
+          <div class="coffee-container">
+            <img src="coffee.png" alt="coffee" class="coffee-img">
+            <div class="steam"></div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <a href="3D-Print Master - by SpackenJaeger.html" class="back-button">Zurück zum Kostenrechner</a>
+  </div>
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const hamburgerContent = document.querySelector('.hamburger-content');
+    hamburger.addEventListener('click', () => {
+      hamburgerContent.style.display = hamburgerContent.style.display === 'block' ? 'none' : 'block';
+    });
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !hamburgerContent.contains(e.target)) {
+        hamburgerContent.style.display = 'none';
+      }
+    });
+    const setTheme = () => {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const savedTheme = localStorage.getItem('theme') || 'system';
+      document.body.setAttribute('data-theme', savedTheme === 'system' ? (prefersDark ? 'dark' : 'light') : savedTheme);
+    };
+    setTheme();
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setTheme);
+    document.querySelectorAll('.theme-option').forEach(option => {
+      option.addEventListener('click', () => {
+        const theme = option.getAttribute('data-theme');
+        localStorage.setItem('theme', theme);
+        setTheme();
+      });
+    });
+  </script>
+</body>
+</html>
